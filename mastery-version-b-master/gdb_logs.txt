@@ -1,0 +1,10 @@
+  5  p* token
+    6  p* next
+    7  p* reader->token
+    8  q
+    9  run mini_ci testcases/basic_add.s
+   10  bt
+   11  q
+   12  run mini_ci testcases/multi_op_err2.s
+   13  q
+   14  show commands

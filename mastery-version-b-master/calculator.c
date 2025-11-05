@@ -5,7 +5,7 @@ int calculate_result(struct Reader *reader) {
     struct Token *head = NULL;
     // create a linkedlist based stack of tokens.
     // pop when a operator is encountered and add the result to the stack
-    while (reader != NULL) {
+    while (reader != NULL && reader->token != NULL) {
         reader->token->next = head;
         head = reader->token;
         if (head->tok_type != TOK_NUM) {
@@ -31,7 +31,12 @@ int calculate_result(struct Reader *reader) {
                     new_token->val = val_a->val + val_b->val;
                     break;
                 case TOK_DIV:
+                    if(val_a->val == 0){
+                                reader->had_error = true;
+        return -1;
+                    }else {
                     new_token->val = val_b->val / val_a->val;
+                    }
                     break;
                 case TOK_MULT:
                     new_token->val = val_a->val * val_b->val;
